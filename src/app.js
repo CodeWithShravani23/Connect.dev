@@ -1,7 +1,23 @@
 const express = require("express");
+const UserData = require("./models/user");
 
 const app = express();
-const { isAuthenticate } = require("./middlewares/auth");
 
+app.post("/user",async(req,res)=>{
+  const user = new UserData({
+    "firstName":'Shravani',
+    "lastName":'Patil',
+    "emailId":'shravani@123',
+    "password":'sharavni'
 
+  })
+  try{
+   await user.save();
+   res.send("user data saved sucessfully");
+  }
+  catch(err){
+    res.status(505).send("Error saving the data ");
+  }
+ 
+})
 module.exports = app;
