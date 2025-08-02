@@ -4,13 +4,7 @@ const UserData = require("./models/user");
 const app = express();
 
 app.post("/signup",async(req,res)=>{
-  const user = new UserData({
-    "firstName":'Shravani',
-    "lastName":'Patil',
-    "emailId":'shravani@123',
-    "password":'sharavni'
-
-  })
+  const user = new UserData(req.body);
   try{
    await user.save();
    res.send("user data saved sucessfully");
