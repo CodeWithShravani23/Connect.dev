@@ -3,7 +3,7 @@ const UserData = require("./models/user");
 
 const app = express();
 
-app.post("/user",async(req,res)=>{
+app.post("/signup",async(req,res)=>{
   const user = new UserData({
     "firstName":'Shravani',
     "lastName":'Patil',
