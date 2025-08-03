@@ -6,42 +6,42 @@
 
 ## 🚀 Project Goals
 
-- ✅ Relatable to the developer community  
-- ✅ Beginner-friendly yet packed with intermediate complexity  
-- ✅ Covers full-stack development (frontend + backend)  
-- ✅ Easily extendable for future features  
-- ✅ Practical for portfolios and real-world learning  
+- ✅ Relatable to the developer community
+- ✅ Beginner-friendly yet packed with intermediate complexity
+- ✅ Covers full-stack development (frontend + backend)
+- ✅ Easily extendable for future features
+- ✅ Practical for portfolios and real-world learning
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Layer       | Tech Used              |
-|-------------|------------------------|
-| Frontend    | React.js, Tailwind CSS |
-| Backend     | Node.js, Express.js    |
-| Database    | MongoDB (Mongoose)     |
-| Auth        | JWT, bcrypt            |
-| Tools       | Axios, Nodemon, Postman|
+| Layer    | Tech Used               |
+| -------- | ----------------------- |
+| Frontend | React.js, Tailwind CSS  |
+| Backend  | Node.js, Express.js     |
+| Database | MongoDB (Mongoose)      |
+| Auth     | JWT, bcrypt             |
+| Tools    | Axios, Nodemon, Postman |
 
 ---
 
 ## ✨ Features
 
-- 🔐 **User Authentication**: Register/Login with JWT  
-- 👤 **Developer Profiles**: Bio, skills, GitHub links  
-- 📝 **Posts Feed**: Create, update, delete, and view posts  
-- ❤️ **Engagement**: Like and comment system  
-- 🔄 **Follow System**: Follow and unfollow developers  
-- 🖼️ **Media Upload**: Profile pictures, cover photos (optional)  
-- 🌐 **Responsive Design**: Works well on all devices  
-- 📦 **Modular Codebase**: Clean and scalable structure  
+- 🔐 **User Authentication**: Register/Login with JWT
+- 👤 **Developer Profiles**: Bio, skills, GitHub links
+- 📝 **Posts Feed**: Create, update, delete, and view posts
+- ❤️ **Engagement**: Like and comment system
+- 🔄 **Follow System**: Follow and unfollow developers
+- 🖼️ **Media Upload**: Profile pictures, cover photos (optional)
+- 🌐 **Responsive Design**: Works well on all devices
+- 📦 **Modular Codebase**: Clean and scalable structure
 
 ---
 
 ## 📁 Folder Structure
 
-```bash
+````bash
 connect-dev/
 ├── client/              # React frontend
 │   └── src/
@@ -103,3 +103,4 @@ Copy
 Edit
 cd ../server
 npm install
+````
