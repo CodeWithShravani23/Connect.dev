@@ -24,19 +24,19 @@ app.get("/user", async (req, res) => {
       res.send(users);
     }
   } catch (err) {
-    res.status(505).send("Error saving the data ");
+    res.status(505).send("Error getting user ");
   }
 });
 
 //Feed api
 app.get("/feed",async(req,res)=>{
   try {
-    const users=UserData.find({});
+    const users= await UserData.find({});
     res.send(users);
 
   }
   catch (err) {
-    res.status(505).send("Error saving the data ");
+    res.status(505).send("Error getting feed ");
   }
 
 })
