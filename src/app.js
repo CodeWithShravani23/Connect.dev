@@ -17,7 +17,7 @@ app.post("/signup", async (req, res) => {
 app.get("/user", async (req, res) => {
   const userEmail = req.body.emailId;
   try {
-    users =await UserData.find({ emailId: userEmail });
+    users = await UserData.find({ emailId: userEmail });
     if (users.length === 0) {
       res.status(404).send("user not found");
     } else {
@@ -29,20 +29,16 @@ app.get("/user", async (req, res) => {
 });
 
 //Feed api
-app.get("/feed",async(req,res)=>{
+app.get("/feed", async (req, res) => {
   try {
-    const users= await UserData.find({});
-    if(!users){
- res.status(404).send("user not found");
+    const users = await UserData.find({});
+    if (!users) {
+      res.status(404).send("user not found");
+    } else {
+      res.send(users);
     }
-    else{
-  res.send(users);
-    }
-
-  }
-  catch (err) {
+  } catch (err) {
     res.status(505).send("Error getting feed ");
   }
-
-})
+});
 module.exports = app;
