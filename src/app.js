@@ -17,7 +17,7 @@ app.post("/signup", async (req, res) => {
 app.get("/user", async (req, res) => {
   const userEmail = req.body.emailId;
   try {
-    users = model.UserData.find({ emailId: userEmail });
+    users =await UserData.find({ emailId: userEmail });
     if (users.length === 0) {
       res.status(404).send("user not found");
     } else {
@@ -27,4 +27,17 @@ app.get("/user", async (req, res) => {
     res.status(505).send("Error saving the data ");
   }
 });
+
+//Feed api
+app.get("/feed",async(req,res)=>{
+  try {
+    const users=UserData.find({});
+    res.send(users);
+
+  }
+  catch (err) {
+    res.status(505).send("Error saving the data ");
+  }
+
+})
 module.exports = app;
