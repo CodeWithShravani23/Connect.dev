@@ -32,7 +32,12 @@ app.get("/user", async (req, res) => {
 app.get("/feed",async(req,res)=>{
   try {
     const users= await UserData.find({});
-    res.send(users);
+    if(!users){
+ res.status(404).send("user not found");
+    }
+    else{
+  res.send(users);
+    }
 
   }
   catch (err) {
