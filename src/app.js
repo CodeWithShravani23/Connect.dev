@@ -1,5 +1,6 @@
 const express = require("express");
 const UserData = require("./models/user");
+const { model } = require("mongoose");
 
 const app = express();
 
@@ -12,4 +13,20 @@ app.post("/signup", async (req, res) => {
     res.status(505).send("Error saving the data ");
   }
 });
+app.get("/user",async(req,res)=>{
+  const userEmail=req.body.emailId;
+  try{
+    users=model.UserData.find({emailId:userEmail});
+    if(users.length===0){
+      res.status(404).send("user not found")
+    }
+    else{
+      res.send(users);
+    }
+  }
+  catch (err) {
+    res.status(505).send("Error saving the data ");
+  }
+
+})
 module.exports = app;
