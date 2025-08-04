@@ -42,3 +42,15 @@ app.get("/feed", async (req, res) => {
   }
 });
 module.exports = app;
+
+//Delete a user
+app.delete("/user",async(req,res)=>{
+  try{
+    const userId=req.body.userId;
+    UserData.findByIdAndDelete(userId);
+    res.send("user deleted sucessfully");
+  }
+   catch (err) {
+    res.status(505).send("Error deleting an user ");
+  }
+})
