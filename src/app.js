@@ -2,7 +2,9 @@ const express = require("express");
 const UserData = require("./models/user");
 const { model } = require("mongoose");
 
+
 const app = express();
+app.use(express.json());
 
 app.post("/signup", async (req, res) => {
   const user = new UserData(req.body);
@@ -57,13 +59,14 @@ app.delete("/user", async (req, res) => {
 //UPDATE DATA
 app.patch("/user",async(req,res)=>{
   try{
-    const userId=req.body.userId;
+    const userId=req.body._id;
     const data=req.body;
-    await UserData.findByIdAndDelete(userId,data);
-   console.log("Data updated sucessfully");
+    await UserData.findByIdAndUpdate(userId,data);
+   res.send("Data updated sucessfully");
   }
   catch (err) {
-    res.status(505).send("Error updating an user ");
+     console.error("Error updating user:", err);
+    res.status(500).send("Error updating an user ");
   }
 
-})
+});
