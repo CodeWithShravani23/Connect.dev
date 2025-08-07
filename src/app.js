@@ -2,7 +2,6 @@ const express = require("express");
 const UserData = require("./models/user");
 const { model } = require("mongoose");
 
-
 const app = express();
 app.use(express.json());
 
@@ -12,7 +11,7 @@ app.post("/signup", async (req, res) => {
     await user.save();
     res.send("user data saved sucessfully");
   } catch (err) {
-    res.status(505).send("Error saving the data ");
+    res.status(500).send("Error saving the data ");
   }
 });
 
@@ -26,7 +25,7 @@ app.get("/user", async (req, res) => {
       res.send(users);
     }
   } catch (err) {
-    res.status(505).send("Error getting user ");
+    res.status(500).send("Error getting user ");
   }
 });
 
@@ -40,7 +39,7 @@ app.get("/feed", async (req, res) => {
       res.send(users);
     }
   } catch (err) {
-    res.status(505).send("Error getting feed ");
+    res.status(500).send("Error getting feed ");
   }
 });
 module.exports = app;
@@ -49,24 +48,22 @@ module.exports = app;
 app.delete("/user", async (req, res) => {
   try {
     const userId = req.body.userId;
-    UserData.findByIdAndDelete(userId);
+    await UserData.findByIdAndDelete(userId);
     res.send("user deleted sucessfully");
   } catch (err) {
-    res.status(505).send("Error deleting an user ");
+    res.status(500).send("Error deleting an user ");
   }
 });
 
 //UPDATE DATA
-app.patch("/user",async(req,res)=>{
-  try{
-    const userId=req.body._id;
-    const data=req.body;
-    await UserData.findByIdAndUpdate(userId,data);
-   res.send("Data updated sucessfully");
-  }
-  catch (err) {
-     console.error("Error updating user:", err);
+app.patch("/user", async (req, res) => {
+  try {
+    const userId = req.body.userId;
+    const data = req.body;
+    await UserData.findByIdAndUpdate(userId, data);
+    res.send("Data updated sucessfully");
+  } catch (err) {
+    console.error("Error updating user:", err);
     res.status(500).send("Error updating an user ");
   }
-
 });
