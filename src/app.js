@@ -53,3 +53,17 @@ app.delete("/user", async (req, res) => {
     res.status(505).send("Error deleting an user ");
   }
 });
+
+//UPDATE DATA
+app.patch("/user",async(req,res)=>{
+  try{
+    const userId=req.body.userId;
+    const data=req.body;
+    await UserData.findByIdAndDelete(userId,data);
+   console.log("Data updated sucessfully");
+  }
+  catch (err) {
+    res.status(505).send("Error updating an user ");
+  }
+
+})
