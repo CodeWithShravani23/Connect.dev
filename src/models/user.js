@@ -3,45 +3,47 @@ const { Schema } = require("mongoose");
 const userSchema = new Schema({
   firstName: {
     type: String,
-    required:true,
-    minLength:2,
-    maxLength:50
+    required: true,
+    minLength: 2,
+    maxLength: 50,
   },
   lastName: {
     type: String,
   },
   emailId: {
     type: String,
-     required:true,
-     unique:true,
-    lowercase:true,
-    trim:true
+    required: true,
+    unique: true,
+    lowercase: true,
+    trim: true,
   },
   password: {
     type: String,
-     required:true
+    required: true,
   },
   age: {
     type: Number,
-     required:true,
-     min:18,
-      lowercase: true
+    required: true,
+    min: 18,
+    lowercase: true,
   },
   gender: {
     type: String,
-     required:true,
-       enum: ["male", "female", "other"]
+    required: true,
+    enum: ["male", "female", "other"],
   },
-  profilePhoto:{
-    type:String,
-    default:"https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg"    
+  profilePhoto: {
+    type: String,
+    default:
+      "https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg",
   },
-  about:{
-    type:String
+  about: {
+    type: String,
+  },
+  skills:{
+    type:[String]
   }
-
-
-
-});
+},
+{ timestamps: true });
 const UserData = mongoose.model("User", userSchema);
 module.exports = UserData;
