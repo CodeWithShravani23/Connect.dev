@@ -10,9 +10,11 @@ app.post("/signup", async (req, res) => {
   try {
     await user.save();
     res.send("user data saved sucessfully");
-  } catch (err) {
-    res.status(500).send("Error saving the data ");
-  }
+  }catch (err) {
+  console.error("Error saving user:", err);
+  res.status(400).json({ message: err.message, error: err });
+}
+
 });
 
 app.get("/user", async (req, res) => {

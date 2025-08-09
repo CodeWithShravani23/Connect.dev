@@ -24,12 +24,13 @@ const userSchema = new Schema({
   age: {
     type: Number,
      required:true,
-     min:18
+     min:18,
+      lowercase: true
   },
   gender: {
     type: String,
      required:true,
-       enum: ["Male", "Female", "Other"]
+       enum: ["male", "female", "other"]
   },
   profilePhoto:{
     type:String,
