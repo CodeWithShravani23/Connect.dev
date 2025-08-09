@@ -3,7 +3,9 @@ const { Schema } = require("mongoose");
 const userSchema = new Schema({
   firstName: {
     type: String,
-    required:true
+    required:true,
+    minLength:2,
+    maxLength:50
   },
   lastName: {
     type: String,
@@ -11,7 +13,9 @@ const userSchema = new Schema({
   emailId: {
     type: String,
      required:true,
-     unique:true
+     unique:true,
+    lowercase:true,
+    trim:true
   },
   password: {
     type: String,
@@ -19,12 +23,24 @@ const userSchema = new Schema({
   },
   age: {
     type: Number,
-     required:true
+     required:true,
+     min:18
   },
   gender: {
     type: String,
-     required:true
+     required:true,
+       enum: ["Male", "Female", "Other"]
   },
+  profilePhoto:{
+    type:String,
+    default:"https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg"    
+  },
+  about:{
+    type:String
+  }
+
+
+
 });
 const UserData = mongoose.model("User", userSchema);
 module.exports = UserData;
