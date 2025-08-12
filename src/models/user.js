@@ -11,6 +11,7 @@ const userSchema = new Schema(
     },
     lastName: {
       type: String,
+       required: true,
       minLength: 2,
       maxLength: 50,
     },
@@ -39,13 +40,12 @@ const userSchema = new Schema(
     },
     age: {
       type: Number,
-      required: true,
       min: 18,
       max: 90,
     },
     gender: {
       type: String,
-      required: true,
+     
       enum: ["male", "female", "other"],
     },
     profilePhoto: {
