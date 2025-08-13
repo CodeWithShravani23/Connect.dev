@@ -11,7 +11,7 @@ app.post("/signup", async (req, res) => {
    //validate
    //Encrypt the password
    const {firstName,lastName,emailId,password}= req.body;
-   const hashedPassword=bcrypt.hash(password,10);
+    const hashedPassword=await bcrypt.hash(password,10);
    const user = new UserData({
     firstName,
     lastName,
@@ -25,6 +25,29 @@ app.post("/signup", async (req, res) => {
     res.status(400).json({ message: err.message, error: err });
   }
 });
+
+//Login api
+app.post("/login",async(req,res)=>{
+  try{
+    const {emailId,password}=req.body;
+    const user=await UserData.findOne({emailId:emailId});
+    if(!user){
+      res.status(400).send("invalid credentials");
+    }
+    isValid=bcrypt.compare(password,user.password);
+    if(isValid){
+      res.send("Logged in successfully!!!");
+    }
+    else{
+      res.status(400).send("invalid credentials");
+    }
+
+  } catch (err) {
+    res.status(400).json({ message: err.message, error: err });
+  }
+
+
+})
 
 
 
