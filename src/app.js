@@ -32,22 +32,20 @@ app.post("/login",async(req,res)=>{
     const {emailId,password}=req.body;
     const user=await UserData.findOne({emailId:emailId});
     if(!user){
-      res.status(400).send("invalid credentials");
+      return res.status(500).send("invalid credentials");
     }
-    isValid=bcrypt.compare(password,user.password);
+    const isValid=await bcrypt.compare(password,user.password);
     if(isValid){
       res.send("Logged in successfully!!!");
     }
     else{
-      res.status(400).send("invalid credentials");
+      res.status(500).send("invalid credentials");
     }
 
   } catch (err) {
-    res.status(400).json({ message: err.message, error: err });
+    res.status(500).json({ message: err.message, error: err });
   }
-
-
-})
+});
 
 
 
