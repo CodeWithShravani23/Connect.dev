@@ -2,7 +2,7 @@ const express = require("express");
 const UserData = require("./models/user");
 const { model } = require("mongoose");
 const bcrypt = require("bcrypt");
-var jwt = require('jsonwebtoken');
+var jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const app = express();
 app.use(express.json());
@@ -38,9 +38,9 @@ app.post("/login", async (req, res) => {
     const isValid = await bcrypt.compare(password, user.password);
     if (isValid) {
       //jwt logic
-    let token = jwt.sign( {_id:user._id},'Shravani@1234');
-     res.cookie("token",token);
-     res.send("Logged in successfully!!!");
+      let token = await jwt.sign({ _id: user._id }, "Shravani@1234");
+      res.cookie("token", token);
+      res.send("Logged in successfully!!!");
     } else {
       res.status(500).send("invalid credentials");
     }
@@ -49,14 +49,21 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.get('/porfile',(req,res)=>{
-  try{
-
-  }
-  catch (err) {
+app.get("/porfile", async (req, res) => {
+  try {
+    const cookie = await body.cookies;
+    const { token } = cookie;
+    if (!token) throw new Error("token is invalid ");
+    const decoded = await jwt.verify(token, "Shravani@1234");
+    const { _id } = decoded;
+    const user = await UserData.findById(_id);
+    if (!user) throw new Error("user not found");
+    res.send(user);
+  } catch (err) {
     res.status(500).json({ message: err.message, error: err });
   }
-})
+});
+
 app.get("/user", async (req, res) => {
   const userEmail = req.body.emailId;
   try {
