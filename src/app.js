@@ -4,7 +4,7 @@ const { model } = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
-const {useAuth}=require('./middlewares/auth');
+const { useAuth } = require("./middlewares/auth");
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
@@ -42,7 +42,6 @@ app.post("/login", async (req, res) => {
       let token = await jwt.sign({ _id: user._id }, "Shravani@1234");
       res.cookie("token", token);
       res.send("Logged in successfully!!!");
-
     } else {
       res.status(500).send("invalid credentials");
     }
@@ -51,16 +50,14 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.get("/profile",useAuth, async (req, res) => {
+app.get("/profile", useAuth, async (req, res) => {
   try {
-   const user=req.user;
+    const user = req.user;
     res.send(user);
   } catch (err) {
     res.status(500).json({ message: err.message, error: err });
   }
 });
-
-
 
 app.get("/user", async (req, res) => {
   const userEmail = req.query.emailId;
