@@ -51,7 +51,7 @@ app.post("/login", async (req, res) => {
 
 app.get('/porfile',(req,res)=>{
   try{
-if()
+
   }
   catch (err) {
     res.status(500).json({ message: err.message, error: err });
