@@ -2,8 +2,11 @@ const express = require("express");
 const UserData = require("./models/user");
 const { model } = require("mongoose");
 const bcrypt = require("bcrypt");
+var jwt = require('jsonwebtoken');
+const cookieParser = require("cookie-parser");
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 
 app.post("/signup", async (req, res) => {
   try {
@@ -34,7 +37,10 @@ app.post("/login", async (req, res) => {
     }
     const isValid = await bcrypt.compare(password, user.password);
     if (isValid) {
-      res.send("Logged in successfully!!!");
+      //jwt logic
+    let token = jwt.sign( {_id:user._id},'Shravani@1234');
+     res.cookie("token",token);
+     res.send("Logged in successfully!!!");
     } else {
       res.status(500).send("invalid credentials");
     }
@@ -43,6 +49,14 @@ app.post("/login", async (req, res) => {
   }
 });
 
+app.get('/porfile',(req,res)=>{
+  try{
+if()
+  }
+  catch (err) {
+    res.status(500).json({ message: err.message, error: err });
+  }
+})
 app.get("/user", async (req, res) => {
   const userEmail = req.body.emailId;
   try {
