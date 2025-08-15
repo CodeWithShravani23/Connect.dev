@@ -49,9 +49,9 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.get("/porfile", async (req, res) => {
+app.get("/profile", async (req, res) => {
   try {
-    const cookie = await body.cookies;
+    const cookie = await req.cookies;
     const { token } = cookie;
     if (!token) throw new Error("token is invalid ");
     const decoded = await jwt.verify(token, "Shravani@1234");
