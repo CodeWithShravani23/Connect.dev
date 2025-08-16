@@ -12,9 +12,9 @@ app.use(cookieParser());
 
 app.post("/signup", async (req, res) => {
   try {
-    //validate
+    
     validateSignupData(req);
-    //Encrypt the password
+  
     const { firstName, lastName, emailId, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new UserData({
@@ -121,7 +121,6 @@ app.patch("/user/:id", async (req, res) => {
     if (!isAllowed) {
       return res.status(400).send("Update is not allowed");
     }
-
     await UserData.findByIdAndUpdate(userId, data, {
       new: true,
       runValidators: true,
