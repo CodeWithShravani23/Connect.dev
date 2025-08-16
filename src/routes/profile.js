@@ -11,4 +11,4 @@ profileRouter.get("/profile", useAuth, async (req, res) => {
   }
 });
 
-module.exports=profileRouter();
+module.exports=profileRouter;
