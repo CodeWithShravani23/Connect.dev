@@ -10,25 +10,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-app.post("/signup", async (req, res) => {
-  try {
-    
-    validateSignupData(req);
-  
-    const { firstName, lastName, emailId, password } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const user = new UserData({
-      firstName,
-      lastName,
-      emailId,
-      password: hashedPassword,
-    });
-    await user.save();
-    res.send("user data saved sucessfully");
-  } catch (err) {
-    res.status(400).json(err.message);
-  }
-});
+
 
 
 app.post("/login", async (req, res) => {

@@ -84,6 +84,12 @@ userSchema.methods.verifyUser = async function (userEnteredPassword) {
   const isValid = await bcrypt.compare(userEnteredPassword, hashedPassword);
   return isValid;
 };
+userSchema.methods.encryptPassword=async function(){
+  const user=this;
+   const hashedPassword = await bcrypt.hash(user.password, 10);
+   return hashedPassword;
+}
+
 
 const UserData = mongoose.model("User", userSchema);
 module.exports = UserData;
