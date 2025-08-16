@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const { useAuth } = require("./middlewares/auth");
+const {validateSignupData}=require('./utils/validation')
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
@@ -12,6 +13,7 @@ app.use(cookieParser());
 app.post("/signup", async (req, res) => {
   try {
     //validate
+    validateSignupData(req);
     //Encrypt the password
     const { firstName, lastName, emailId, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -28,7 +30,7 @@ app.post("/signup", async (req, res) => {
   }
 });
 
-//Login api
+
 app.post("/login", async (req, res) => {
   try {
     const { emailId, password } = req.body;
@@ -58,6 +60,10 @@ app.get("/profile", useAuth, async (req, res) => {
     res.status(500).json({ message: err.message, error: err });
   }
 });
+
+app.post("/ConnectionRequest",useAuth,(req,res)=>{
+  res.send("connection request sent !!")
+})
 
 app.get("/user", async (req, res) => {
   const userEmail = req.query.emailId;
