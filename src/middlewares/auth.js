@@ -6,7 +6,7 @@ const useAuth = async (req, res, next) => {
     const cookie = req.cookies;
     const { token } = cookie;
     if (!token) throw new Error("token is Missing ");
-    const decoded = jwt.verify(token, "Shravani@1234");
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const { _id } = decoded;
     const user = await UserData.findById(_id);
     if (!user) throw new Error("user not found");
