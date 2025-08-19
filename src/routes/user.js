@@ -1,6 +1,6 @@
-const express=require('express');
+const express = require("express");
 
-const userRouter=express.Router();
+const userRouter = express.Router();
 
 userRouter.get("/user", async (req, res) => {
   const userEmail = req.query.emailId;
@@ -16,4 +16,4 @@ userRouter.get("/user", async (req, res) => {
   }
 });
 
-module.exports=userRouter;
+module.exports = userRouter;
