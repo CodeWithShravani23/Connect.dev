@@ -10,7 +10,6 @@ const useAuth = async (req, res, next) => {
     const { _id } = decoded;
     const user = await UserData.findById(_id);
     if (!user) throw new Error("user not found");
-
     req.user = user;
     next();
   } catch (err) {
