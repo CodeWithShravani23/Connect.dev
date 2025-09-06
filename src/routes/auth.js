@@ -1,14 +1,13 @@
-const express=require('express');
+const express = require("express");
 
-const authRouter=express.Router();
+const authRouter = express.Router();
 const UserData = require("../models/user");
-const {validateSignupData}=require('../utils/validation');
+const { validateSignupData } = require("../utils/validation");
 
 authRouter.post("/signup", async (req, res) => {
   try {
-    
     validateSignupData(req);
-  
+
     const { firstName, lastName, emailId, password } = req.body;
     const user = new UserData({
       firstName,
@@ -16,7 +15,7 @@ authRouter.post("/signup", async (req, res) => {
       emailId,
       password,
     });
-    user.password=await user.encryptPassword();
+    user.password = await user.encryptPassword();
     await user.save();
     res.send("user data saved sucessfully");
   } catch (err) {
@@ -34,7 +33,10 @@ authRouter.post("/login", async (req, res) => {
     const isValid = await user.verifyUser(password);
     if (isValid) {
       let token = await user.getJWT();
-      res.cookie("token", token,{  expires: new Date(Date.now() + 24 * 3600000), httpOnly: true });
+      res.cookie("token", token, {
+        expires: new Date(Date.now() + 24 * 3600000),
+        httpOnly: true,
+      });
       res.send("Logged in successfully!!!");
     } else {
       res.status(500).send("invalid credentials");
@@ -44,4 +46,4 @@ authRouter.post("/login", async (req, res) => {
   }
 });
 
-module.exports=authRouter;
+module.exports = authRouter;
